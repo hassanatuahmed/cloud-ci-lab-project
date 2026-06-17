@@ -1,0 +1,28 @@
+name: Cloud CI Pipeline
+
+# Trigger on push to any branch
+on: [push]
+
+jobs:
+  ci-pipeline:
+    # Use Ubuntu runner
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout code
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # Set up language runtime
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    # Run app
+    - name: Run app
+      run: python app.py
+
+    # Run test command
+    - name: Run test command
+      run: python -m unittest test_app.py
